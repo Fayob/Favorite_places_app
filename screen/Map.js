@@ -1,6 +1,7 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+
 import IconButton from '../components/UI/IconButton';
 
 function Map({navigation}) {
@@ -29,7 +30,7 @@ function Map({navigation}) {
       pickedLat: selectedLocation.lat,
       pickedLng: selectedLocation.lng,
     })
-    console.log(selectedLocation);
+    // console.log(selectedLocation);
   }, [navigation, selectedLocation])
 
   useLayoutEffect(() => {
