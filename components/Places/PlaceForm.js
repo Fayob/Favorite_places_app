@@ -15,7 +15,7 @@ function PlaceForm({onCreatePlace}) {
     setEnteredTitle(enteredText)
   }
 
-  function takeImageHandler(imageUri) {
+  function takeImageHandler (imageUri) {
     setSelectedImage(imageUri)
   }
 

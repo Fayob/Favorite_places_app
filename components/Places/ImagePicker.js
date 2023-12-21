@@ -1,10 +1,11 @@
-import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, Image, StyleSheet, Text, View } from 'react-native';
 import {
   launchCameraAsync,
   useCameraPermissions,
   PermissionStatus,
 } from 'expo-image-picker';
-import { useState } from 'react';
+
 import { Colors } from '../../constants/colors';
 import OutlineButton from '../UI/OutlineButton';
 
@@ -13,7 +14,7 @@ function ImagePicker({ onTakeImage }) {
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
 
-  async function verifyPermissions(params) {
+  async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
       const permissionResponse = await requestPermission();
 
@@ -44,10 +45,13 @@ function ImagePicker({ onTakeImage }) {
       quality: 0.5,
     });
 
-    // console.log(image);
+    if (!image.canceled) {
+      console.log(image);
+      setPickedImage(image.assets[0].uri);
+      onTakeImage(image.assets[0].uri);   
+    }
+
     // setPickedImage(image.uri);
-    setPickedImage(image.assets[0].uri);
-    onTakeImage(image.assets[0].uri);
   }
 
   let imagePreview = <Text>No image taken yet</Text>;
